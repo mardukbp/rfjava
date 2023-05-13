@@ -59,21 +59,26 @@ public abstract class KeywordLibrary {
         return obj instanceof Object[] && ((Object[])obj)[0] instanceof String;
     }
 
+    private Object cast(Object arg) {
+        if (isIntArray(arg)) {
+            return toIntArray((Object[])arg);
+        }
+
+        if (isDoubleArray(arg)) {
+            return toDoubleArray((Object[])arg);
+        }
+
+        if (isStrArray(arg)) {
+            return toStrArray((Object[])arg);
+        }
+
+        return arg;
+    }
+
     public RobotResult callKeyword(String keyword, Object[] args) {
         try {
-            if (isIntArray(args[0])) {
-                return (RobotResult)keywords.get(keyword).method.invoke(this, toIntArray((Object[])args[0]));
-            }
-
-            if (isDoubleArray(args[0])) {
-                return (RobotResult)keywords.get(keyword).method.invoke(this, toDoubleArray((Object[])args[0]));
-            }
-
-            if (isStrArray(args[0])) {
-                return (RobotResult)keywords.get(keyword).method.invoke(this, new Object[]{toStrArray((Object[])args[0])});
-            }
-
-            return (RobotResult)keywords.get(keyword).method.invoke(this, args);
+            Object[] parsedArgs = Arrays.stream(args).map(this::cast).toArray();
+            return (RobotResult)keywords.get(keyword).method.invoke(this, parsedArgs);
         }
         catch (InvocationTargetException | IllegalAccessException e) {
             return new RobotResult(
