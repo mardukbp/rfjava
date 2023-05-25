@@ -25,3 +25,10 @@ Concatenate a list of strings
     ${strings}    Create List    Hello        World
     ${result}     Concat List    ,            ${strings}
     Should Be Equal As Strings   ${result}    Hello,World
+
+Add two histograms
+    ${hist1}           Create Dictionary    apples=${3}    bananas=${2}
+    ${hist2}           Create Dictionary    apples=${1}    bananas=${3}
+    ${result}          Add histograms       ${hist1}       ${hist2}
+    ${expected}        Create Dictionary    apples=${4}    bananas=${5}
+    Should Be Equal    ${result}            ${expected}
