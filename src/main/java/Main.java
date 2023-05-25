@@ -9,20 +9,16 @@ public class Main {
         org.apache.log4j.PropertyConfigurator.configure(Main.class.getResourceAsStream("log4j.properties"));
 
         WebServer webServer = new WebServer(port);
-        XmlRpcServer xmlRpcServer = webServer.getXmlRpcServer();
-        RemoteHandlerMapping phm = new RemoteHandlerMapping();
-
         RobotRemote robotRemote = new RobotRemote(new TestLibrary());
 
+        RemoteHandlerMapping phm = new RemoteHandlerMapping();
         phm.setRequestProcessorFactoryFactory(new RobotRemoteFactoryFactory(robotRemote));
         phm.setVoidMethodEnabled(true);
         phm.addHandler(RobotRemote.class.getName(), RobotRemote.class);
 
-//        phm.addHandler(RobotRemote.class.getName(), robotRemote.getClass());
+        XmlRpcServer xmlRpcServer = webServer.getXmlRpcServer();
         xmlRpcServer.setHandlerMapping(phm);
-
-        XmlRpcServerConfigImpl serverConfig =
-                (XmlRpcServerConfigImpl) xmlRpcServer.getConfig();
+        XmlRpcServerConfigImpl serverConfig = (XmlRpcServerConfigImpl) xmlRpcServer.getConfig();
         serverConfig.setEnabledForExtensions(true);
         serverConfig.setContentLengthOptional(false);
 
