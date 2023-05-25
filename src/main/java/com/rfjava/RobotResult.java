@@ -1,12 +1,13 @@
 package com.rfjava;
 
-import java.util.Hashtable;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RobotResult {
-    private final Hashtable<String, Object> result;
+    private final Map<String, Object> result;
 
     private RobotResult(Status status, String output, Object returnValue, String error, String traceback, boolean continuable, boolean fatal) {
-        result = new Hashtable<>();
+        result = new HashMap<>();
         result.put("status", status.name());
         result.put("output", output);
         result.put("return", returnValue);
@@ -40,7 +41,7 @@ public class RobotResult {
         );
     }
 
-    public Hashtable<String, Object> asHashtable() {
+    public Map<String, Object> asMap() {
         return result;
     }
 }

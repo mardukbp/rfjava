@@ -1,7 +1,6 @@
 package com.rfjava;
 
-import java.util.Hashtable;
-import java.util.Vector;
+import java.util.*;
 
 public class RobotRemote {
     private KeywordLibrary library;
@@ -10,20 +9,20 @@ public class RobotRemote {
         this.library = library;
     }
 
-    public Vector<String> get_keyword_names() {
-        return new Vector<>(library.getKeywordNames());
+    public List<String> get_keyword_names() {
+        return new ArrayList<>(library.getKeywordNames());
     }
 
-    public Vector<String> get_keyword_arguments(String keyword) {
-        return new Vector<>(library.getKeyword(keyword).args);
+    public List<String> get_keyword_arguments(String keyword) {
+        return new ArrayList<>(library.getKeyword(keyword).args);
     }
 
-    public Vector<String> get_keyword_types(String keyword) {
-        return new Vector<>(library.getKeyword(keyword).types);
+    public List<String> get_keyword_types(String keyword) {
+        return new ArrayList<>(library.getKeyword(keyword).types);
     }
 
-    public Vector<String> get_keyword_tags(String keyword) {
-        return new Vector<>();
+    public List<String> get_keyword_tags(String keyword) {
+        return new ArrayList<>();
     }
 
     public String get_keyword_documentation(String keyword) {
@@ -38,7 +37,7 @@ public class RobotRemote {
         return library.getKeyword(keyword).doc;
     }
 
-    public Hashtable<String, Object> run_keyword(String keyword, Object[] args) {
-        return library.callKeyword(keyword, args).asHashtable();
+    public Map<String, Object> run_keyword(String keyword, Object[] args) {
+        return library.callKeyword(keyword, args).asMap();
     }
 }

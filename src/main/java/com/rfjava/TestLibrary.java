@@ -1,7 +1,8 @@
 package com.rfjava;
 
 import java.util.Arrays;
-import java.util.Vector;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class TestLibrary extends KeywordLibrary {
     public String getInit() {
@@ -11,6 +12,7 @@ public class TestLibrary extends KeywordLibrary {
     public String getIntro() {
         return "com.rfjava.TestLibrary Intro";
     }
+
 
     @Keyword(name="Sum list")
     @Doc(doc="Sum the integer numbers in a list")
@@ -23,9 +25,7 @@ public class TestLibrary extends KeywordLibrary {
     @Keyword(name="Double list")
     @Doc(doc="Double each integer number in a list")
     public RobotResult doubleList(int[] nums) {
-        Vector<Integer> result = new Vector<Integer>();
-        Arrays.stream(nums).map(i -> 2*i).forEach(i -> result.add(i));
-
+        List<Integer> result = Arrays.stream(nums).map(i -> 2*i).boxed().collect(Collectors.toList());
         return RobotResult.Pass(result, "The doubled list is " + result);
     }
 
