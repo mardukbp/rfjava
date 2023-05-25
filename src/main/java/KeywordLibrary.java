@@ -81,15 +81,7 @@ public abstract class KeywordLibrary {
             return (RobotResult)keywords.get(keyword).method.invoke(this, parsedArgs);
         }
         catch (InvocationTargetException | IllegalAccessException e) {
-            return new RobotResult(
-                    Status.FAIL,
-                    "",
-                    "",
-                    "Calling keyword failed",
-                    "",
-                    false,
-                    true
-            );
+            return RobotResult.Fail("Calling keyword failed");
         }
     }
 }
