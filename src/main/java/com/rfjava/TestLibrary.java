@@ -2,7 +2,9 @@ package com.rfjava;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class TestLibrary extends KeywordLibrary {
     public String getInit() {
@@ -25,8 +27,21 @@ public class TestLibrary extends KeywordLibrary {
     @Keyword(name="Double list")
     @Doc(doc="Double each integer number in a list")
     public RobotResult doubleList(int[] nums) {
-        List<Integer> result = Arrays.stream(nums).map(i -> 2*i).boxed().collect(Collectors.toList());
+        List<Integer> result =
+                Arrays.stream(nums)
+                .map(i -> 2*i)
+                .boxed().collect(Collectors.toList());
+
         return RobotResult.Pass(result, "The doubled list is " + result);
+    }
+
+    @Keyword(name="Add histograms")
+    @Doc(doc="Add two histograms")
+    public RobotResult addHistograms(Map<String, Integer> hist1, Map<String, Integer> hist2) {
+        Map<String, Integer> result = Stream.of(hist1, hist2).flatMap(m -> m.entrySet().stream())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, Integer::sum));
+
+        return RobotResult.Pass(result, "The resulting histogram is " + result);
     }
 
     @Keyword(name="Sum ints")
