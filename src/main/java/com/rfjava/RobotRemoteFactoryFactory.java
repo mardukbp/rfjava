@@ -1,3 +1,5 @@
+package com.rfjava;
+
 import org.apache.xmlrpc.XmlRpcException;
 import org.apache.xmlrpc.XmlRpcRequest;
 import org.apache.xmlrpc.server.RequestProcessorFactoryFactory;

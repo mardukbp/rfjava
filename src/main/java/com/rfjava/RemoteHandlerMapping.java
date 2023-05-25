@@ -1,3 +1,5 @@
+package com.rfjava;
+
 import org.apache.xmlrpc.XmlRpcException;
 import org.apache.xmlrpc.XmlRpcHandler;
 import org.apache.xmlrpc.server.PropertyHandlerMapping;
@@ -15,6 +17,6 @@ public class RemoteHandlerMapping extends PropertyHandlerMapping {
             }
         }
 
-        return super.getHandler("RobotRemote." + pHandlerName);
+        return super.getHandler("com.rfjava.RobotRemote." + pHandlerName);
     }
 }

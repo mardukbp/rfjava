@@ -1,3 +1,5 @@
+package com.rfjava;
+
 import java.util.Hashtable;
 
 public class RobotResult {

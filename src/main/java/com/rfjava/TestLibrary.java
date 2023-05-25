@@ -1,13 +1,15 @@
+package com.rfjava;
+
 import java.util.Arrays;
 import java.util.Vector;
 
 public class TestLibrary extends KeywordLibrary {
     public String getInit() {
-        return "TestLibrary Init";
+        return "com.rfjava.TestLibrary Init";
     }
 
     public String getIntro() {
-        return "TestLibrary Intro";
+        return "com.rfjava.TestLibrary Intro";
     }
 
     @Keyword(name="Sum list")
