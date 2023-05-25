@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Vector;
 
 public class TestLibrary extends KeywordLibrary {
     public String getInit() {
@@ -15,6 +16,15 @@ public class TestLibrary extends KeywordLibrary {
         int result = Arrays.stream(nums).sum();
 
         return RobotResult.Pass(result, "The sum is " + result);
+    }
+
+    @Keyword(name="Double list")
+    @Doc(doc="Double each integer number in a list")
+    public RobotResult doubleList(int[] nums) {
+        Vector<Integer> result = new Vector<Integer>();
+        Arrays.stream(nums).map(i -> 2*i).forEach(i -> result.add(i));
+
+        return RobotResult.Pass(result, "The doubled list is " + result);
     }
 
     @Keyword(name="Sum ints")
